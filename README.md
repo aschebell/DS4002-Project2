@@ -20,10 +20,10 @@ graph TD;
     baby-names-state.csv-->UnisexNameData.csv;
     UnisexNameData.csv-->DataAppendix&References;
     OUTPUT-->Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png;
-    Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png --> Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png;
-    Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png --> Total Number of Babies born by name each year from 1910-2020 with a top 10 unisex name from 2020.png;
-    Total Number of Babies born by name each year from 1910-2020 with a top 10 unisex name from 2020.png --> Total Number of Babies born each year from 1910 to 2020 and their sex.png;
-    Total Number of Babies born each year from 1910 to 2020 and their sex.png --> Total Number of Babies born each year from 1910-2020 with a top 10 unisex name from 2020.png;
+    Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png-->Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png;
+    Total # of Babies born each year with a top 10 unisex name from 2020 by sex.png-->Total Number of Babies born by name each year from 1910-2020 with a top 10 unisex name from 2020.png;
+    Total Number of Babies born by name each year from 1910-2020 with a top 10 unisex name from 2020.png-->Total Number of Babies born each year from 1910 to 2020 and their sex.png;
+    Total Number of Babies born each year from 1910 to 2020 and their sex.png-->Total Number of Babies born each year from 1910-2020 with a top 10 unisex name from 2020.png;
 ```
 
 ## Section 3: Instructions for Reproducing Results
