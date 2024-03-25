@@ -5,7 +5,7 @@ This repository contains the code and documentation for conducting forecasting o
 
 ## *Section 1: Software and Platform Section* - CHANGE
 - Software Used: RStudio (R)
-- Packages Used: tidyverse, dplyr, PMCMRplus, readxl, plotly, wordcloud, tidytext, glue, stringr, tm, VADER from the nltk Python library
+- EDIT: Packages Used: tidyverse, dplyr, PMCMRplus, readxl, plotly, wordcloud, tidytext, glue, stringr, tm, VADER from the nltk Python library
 - Platform used: Mac
 
 ## Section 2: Map of Documentation *(EDIT)*
@@ -41,25 +41,12 @@ CLEAN THE DATA:
 5. Take the top 10 names from this unisex list based on largest number of babies given the name
 6. Filter entire dataset for only those with names in the top 10 unisex list and save dataframe as UnisexNameData.csv
 
-*CREATE EXPLORATORY PLOTS FOR EDA:*
-1. Use ggplot and plotly to create different bar plots that will help to visualize our data, where the Clothing Type is on the x-axis and different variables are on the y-axis for each graph:
-  - Number of Reviews (y-axis) for Each Clothing Type (x-axis)
-  - Distribution of Reviewer Ages (y-axis) for Each Clothing Type (x-axis)
-  - Number of Recommendations (y-axis) for Each Clothing Type (x-axis)
-  - Percentage of Recommendations (y-axis) for Each Clothing Type (x-axis)
+CREATE EXPLORATORY PLOTS FOR EDA:
+1. Use ggplot to create different bar plots that will help to visualize our data, where the year is on the x-axis and different variables are on the y-axis for each graph:
+  - Count of babies (y-axis) for each year (x-axis)
+  - Distribution babies by sex (y-axis) for each year (x-axis)
+  - Count of babies for each name (y-axis) for each year (x-axis)
 2. Save these plots into the OUTPUT folder
-
-*CREATE A WORD CLOUD PLOT:*
-1. Read in the cleaned text data
-2. Create a corpus using the Review Text column
-3. Clean the Review Text column to prep for the word cloud
-  - Convert the text to lower case
-  - Remove special characters
-  - Remove "stop" words (the, is, at on)
-  - Use text stemming to turn each word into its root version
-4. Transform the stripped data into a matrix
-5. Use the word cloud function to create a cloud using the stripped text data matrix
-6. Write above plot into a new csv file
 
 *CONDUCT SENTIMENT ANALYSIS IN PYTHON:*
 1. In Python, import the nltk and pandas libraries
