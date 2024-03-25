@@ -30,13 +30,16 @@ graph TD;
 
 GET THE DATA:
 1. Download the "baby-names-state" csv file from Data World into your computer
-2. *In R, upload the tidyverse, readxl, plotly, wordcloud, tidytext, glue, stringr, and tm packages*
-3. *Read in the excel data file and save it as a data frame in R*
+2. EDIT *In R, upload the tidyverse, readxl, plotly, wordcloud, tidytext, glue, stringr, and tm packages*
+3. Read in the CSV data file and save it as a data frame in R
 
-*CLEAN THE DATA:*
-1. Rename the first column to "ReviewID" to differentiate it from "ClothingID"
-2. Convert the "Division Name," "Departname," "Class Name," and "Recommended IND" columbs to factor data types
-3. Remove the "Positive Feedback Count," "Rating," "Division Name," and "Class Name" columns from the data frame
+CLEAN THE DATA:
+1. Convert the "name," "sex," and "state_abb" columbs to factor data types
+2. Create a "decades" column from the "year" column for each decade of years (ex. 1910-1919)
+3. Create a "region" column from the "state_abb" column for the five regions of the US (ex. Northeast)
+4. Filter data for only rows with a year = 2020 then filter for names with at least 1/3 babies being female and 1/3 babies born being male to determine unisex names
+5. Take the top 10 names from this unisex list based on largest number of babies given the name
+6. Filter entire dataset for only those with names in the top 10 unisex list and save dataframe as UnisexNameData.csv
 
 *CREATE EXPLORATORY PLOTS FOR EDA:*
 1. Use ggplot and plotly to create different bar plots that will help to visualize our data, where the Clothing Type is on the x-axis and different variables are on the y-axis for each graph:
