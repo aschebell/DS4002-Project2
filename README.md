@@ -5,7 +5,7 @@ This repository contains the code and documentation for conducting forecasting o
 
 ## Section 1: Software and Platform Section
 - Software Used: RStudio (R)
-- Packages Used: tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart
+- Packages Used: tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart, rpart.plot
 - Platform used: Mac
 
 ## Section 2: Map of Documentation 
@@ -30,7 +30,7 @@ graph TD;
 
 GET THE DATA:
 1. Download the "baby-names-state" csv file from Data World into your computer
-2. In R, upload the tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart packages
+2. In R, upload the tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart, rpart.plot packages
 3. Read in the CSV data file and save it as a data frame in R
 
 CLEAN THE DATA:
@@ -64,6 +64,14 @@ BASIC CLASSIFICATION TREE -- RECURSIVE BINARY SPLITTING:
    a. This will give you the significant variables used, the number of terminal nodes, the residual mean deviance, and also the misclassification error rate of the model (test error rate!)
 3. Apply plot() and text() to the classification tree created in (1) to view the graphical output
 4. Optional: Use the y response of our data set, the y response of our test data set, the tree we created in (1), the predict() function, and the table() function in R to create a confusion matrix
+
+CLASSIFICATION TREE USING RPART PACKAGE IN R:
+1. Use the rpart() and rpart.plot() functions from the rpart and rpart.plot packages in R to create classification trees that are more informative and visually appealing than the basic models we created above
+   a. The rpart() method can be used on our data set to actually create the classification tree, while the rpart.plot() method is used to output the classification tree graphically
+
+PRUNE THE CLASSIFICATION TREE:
+1. You may need to use the tree::cv.tree() and tree::prune.misclass() functions on our initial basic classification tree model to remove some of the branches, reduce its complexity, or improve its general performance-- pruning a classification tree generally prevents overfitting of the data in the model
+   a. Note that in our project, when we pruned the classification tree using our data set and then reapplied the plot() function on our tree to observe its graphical output, our tree looked exactly the same as before pruning-- in this specific case it appears that pruning the classification tree will not lead to significant improvements
 
 
 
