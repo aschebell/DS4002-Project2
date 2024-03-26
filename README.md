@@ -54,23 +54,17 @@ DATA PREP FOR BASIC CLASSIFICATION TREE MODEL BUILDING:
 3. Remove unnecessary columns from our current data frame -- this should include the "decades" column (which we won't need for analysis), the first column, and the "stat_abb" column
 4. Use the uncount() function in R where the "weights" argument is set equal to the "count" column to expand our data based on the count column
    a. After this step each row should represent one single baby in our data set
+5. Set the seed using set.seed(4002) --> you can use a random number but make sure to stay consistent throughout the project
+6. Split our data set now into a training and a test data set with a 70/30 split
 
-*TEST ASSUMPTIONS FOR HYPOTHESIS TESTING:*
-1. In R, read in the updated csv file containing the data set with the sentiment scores
-2. Use the Department Name column (containing different clothing types) to create three separate data frames containing only bottoms, only tops, and only dresses
-  - The dplyr package is useful when doing this
-3. Pull out only the compound sentiment scores for bottoms, tops, and dresses separately into three different vectors
-4. Create a new data frame with the compound sentiment scores in one column and the clothing type (whether the item is a top, dress, or bottom) in the other column
-5. Apply the aov() ANOVA function on our data
-6. Create a qqplot to check the normality assumption for ANOVA (points should follow the line of normality if our data is normal)
-7. Use the Bartlett test to check for constant variance within our data (the p-value should be less than 0.05 if our data has constant variance)
+BASIC CLASSIFICATION TREE -- RECURSIVE BINARY SPLITTING:
 
-*ASSUMPTIONS NOT MET --- TURN TO NON-PARAMETRIC HYPOTHESIS TESTING*
-1. First construct boxplots to visually compare the compound sentiment scores for tops, pants, and dresses with each other (just to get an idea of what we are working with)
-2. Conduct the Kruskal-Wallis Test on all three groups of clothing items
+1. Use the tree::tree(...,data=...) function from the tree library in R to create the first basic classification tree model
+2. Apply summary() to the classification tree created above
+   a. This will give you the significant variables used, the number of terminal nodes, the residual mean deviance, and also the misclassification error rate of the model (test error rate!)
+3. Apply plot() and text() to the classification tree created in (1) to view the graphical output
+4. Optional: Use the y response of our data set, the y response of our test data set, the tree we created in (1), the predict() function, and the table() function in R to create a confusion matrix
 
-*KRUSKAL-WALLIS TEST SIGNIFICANT --- CONDUCT FOLLOW-UP PAIRWISE TESTING:*
-1. Use the PMCMR package on our data to conduct Dunn's Test for follow-up pairwise testing
-  - This test will compare every possible pairing between the three groups of clothing items to see if their compound sentiment scores are different across their medians
+
 
 
