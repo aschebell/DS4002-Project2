@@ -8,7 +8,7 @@ This repository contains the code and documentation for conducting forecasting o
 - Packages Used: tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart
 - Platform used: Mac
 
-## Section 2: Map of Documentation *(EDIT)*
+## Section 2: Map of Documentation 
 
 - Outline or tree of hierarchy of folders and subfolders and list the files stored in each folder
 ```mermaid
@@ -30,7 +30,7 @@ graph TD;
 
 GET THE DATA:
 1. Download the "baby-names-state" csv file from Data World into your computer
-2. EDIT *In R, upload the tidyverse, readxl, plotly, wordcloud, tidytext, glue, stringr, and tm packages*
+2. In R, upload the tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart packages
 3. Read in the CSV data file and save it as a data frame in R
 
 CLEAN THE DATA:
@@ -48,13 +48,12 @@ CREATE EXPLORATORY PLOTS FOR EDA:
   - Count of babies for each name (y-axis) for each year (x-axis)
 2. Save these plots into the OUTPUT folder
 
-*CONDUCT SENTIMENT ANALYSIS IN PYTHON:*
-1. In Python, import the nltk and pandas libraries
-2. Download VADER from nltk, then create an object of sentiment intensity analyzer
-3. Read in the cleaned data as a data frame
-4. Create a new column called scores using polarity scores function, then add that column into the existing data frame
-5. Use the "lambda score_dict:score_dict['compound']" code found in VADER to create a new column called "compound" that will hold the sentiment scores for each review; add the new column into the existing data frame
-7. Save the updated data set with new sentiment score columns as a csv file into your computer
+DATA PREP FOR BASIC CLASSIFICATION TREE MODEL BUILDING:
+1. Read in the previously cleaned data as a csv file in R
+2. Convert the "sex", "name", and "region" variables into factor variable types
+3. Remove unnecessary columns from our current data frame -- this should include the "decades" column (which we won't need for analysis), the first column, and the "stat_abb" column
+4. Use the uncount() function in R where the "weights" argument is set equal to the "count" column to expand our data based on the count column
+   a. After this step each row should represent one single baby in our data set
 
 *TEST ASSUMPTIONS FOR HYPOTHESIS TESTING:*
 1. In R, read in the updated csv file containing the data set with the sentiment scores
