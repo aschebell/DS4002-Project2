@@ -1,0 +1,428 @@
+---
+title: "DS4002Project2"
+output: html_document
+date: "2024-03-07"
+---
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+# Avery's Data Cleaning + EDA
+
+```{r}
+#df <- read_csv("baby-names-beginning-2007-1.csv")
+
+# baby-names-state.csv
+df <- read_csv("baby-names-state.csv")
+data <- df
+#view(data)
+data$name <- as.factor(data$name)
+#str(data$County)
+data$sex<- as.factor(data$sex)
+#data$County <- toupper(data$County)
+data$state_abb <- factor(data$state_abb)
+#view(data)
+#summary(data)
+```
+
+```{r}
+jasdata <- data %>% filter(`First Name` == "JASMINE")
+
+ggplot(jasdata, aes(Year, Count, fill = Sex)) + geom_col()
+
+avedata <- data %>% filter(`First Name` == "AVERY")
+
+ggplot(avedata, aes(Year, Count, fill = Sex)) + geom_col()
+
+megdata <- data %>% filter(`First Name` == "MEGAN")
+
+ggplot(megdata, aes(Year, Count, fill = Sex)) + geom_col()
+
+quidata <- data %>% filter(`First Name` == "QUINN")
+
+ggplot(quidata, aes(Year, Count, fill = Sex)) + geom_col()
+
+alexdata <- data %>% filter(`First Name` == "ALEX")
+
+ggplot(alexdata, aes(Year, Count, fill = Sex)) + geom_col()
+
+maxdata <- data %>% filter(name == "William") 
+
+ggplot(maxdata, aes(year, count, fill = sex)) + geom_col()
+```
+
+# total number of babies 
+```{r}
+df2 <- data %>% group_by(name) %>%summarise(totcount = sum(count)) %>% arrange(desc(totcount))
+
+head(df2, 200)
+
+ggplot(maxdata, aes(year, count, fill = sex)) + geom_col()
+
+
+#ggplot(df2, aes(Year, totcount)) + geom_
+```
+
+```{r}
+df3 <- data %>% group_by(`First Name`) %>%summarise(totcount = sum(Count)) %>% arrange(desc(totcount))
+
+head(df3, 50)
+
+
+df4 <- data %>% filter(Year == 2007) %>% group_by(`First Name`) %>%summarise(totcount = sum(Count)) %>% arrange(desc(totcount))
+
+head(df4, 20)
+
+df5 <- data %>% filter(Year == 2016) %>% group_by(`First Name`) %>%summarise(totcount = sum(Count)) %>% arrange(desc(totcount))
+
+head(df5, 20)
+```
+
+https://www.bustle.com/style/9-spring-ready-shoes-bustle-editors-are-currently-obsessing-over
+
+```{r}
+unisexnames <- c("RILEY", "AVERY", "ROWAN", "FINLEY", "PEYTON", "JUDE", "SAGE", "AUGUSTINE", "ARLO", "CHARLIE", "CARTER", "CAMERON", "JORDAN", "TAYLOR")
+
+levels(data$County)
+```
+https://www.ssa.gov/oact/babynames/state/top5_2016.html
+
+```{r}
+tsexample <- ts(data$name)
+autoplot
+```
+
+```{r}
+ridata <- data %>% filter(name == "Riley") %>% filter(year == 2012)
+
+summary(ridata)
+```
+
+```{r}
+names <- c("Ariadne", "Aurelia", "Aurora")
+
+ariadne <-  data %>% filter(name %in% names)
+
+ggplot(ariadne, aes(year, count, fill = name)) + geom_col()
+```
+
+```{r}
+dataearly <- data %>% filter(year< 1950) 
+
+summary(dataearly)
+```
+
+```{r}
+data2020m <- data %>% filter(year == 2020) %>% filter(sex == "M") %>% group_by(name) %>%  summarize(totmale = sum(count)) 
+
+#data2020m$totmale <- as.numeric(data2020m$totmale)
+
+#data2020m
+
+
+data2020f <- data %>% filter(year == 2020) %>% filter(sex == "F") %>% group_by(name) %>% summarize(totfemale = sum(count)) 
+
+#data2020f$totfemale <- as.numeric(data2020f$totfemale)
+
+#head(data2020f, 20)
+
+data2020tot <- bind_rows(data2020f, data2020m) 
+
+data2020tot[is.na(data2020tot)] <- 0
+
+data2020tot$name <- tolower(data2020tot$name)
+
+data2020tot$name <- trimws(data2020tot$name)
+
+data2020tot2 <- data2020tot %>% group_by(name) %>% summarize(totfemale = sum(totfemale), totmale = sum(totmale)) %>% mutate(totname = totfemale + totmale) %>% mutate(pctf = totfemale/totname) %>% mutate(pctm = totmale/totname) %>% filter(pctf >= 1/3 & pctm >= 1/3) %>% arrange(desc(totname)) 
+
+
+#%>% filter(pctf >= 1/3) 
+
+view(data2020tot2)
+```
+
+```{r}
+datar <- data %>% filter(year == 2020) %>% summarize(tot = sum(count))
+
+summary(datar)
+
+#ggplot(datar, aes(year, count)) + geom_col()
+
+#str(datar$year)
+```
+
+```{r}
+data2020m <- data %>% filter(year == 2020) %>% filter(sex == "M") %>% group_by(name) %>%  summarize(totmale = sum(count)) 
+
+data2020f <- data %>% filter(year == 2020) %>% filter(sex == "F") %>% group_by(name) %>% summarize(totfemale = sum(count)) 
+
+data2020tot <- bind_rows(data2020f, data2020m) 
+
+data2020tot[is.na(data2020tot)] <- 0
+
+data2020tot$name <- tolower(data2020tot$name)
+
+data2020tot$name <- trimws(data2020tot$name)
+
+data2020tot2 <- data2020tot %>% group_by(name) %>% summarize(totfemale = sum(totfemale), totmale = sum(totmale)) %>% mutate(totname = totfemale + totmale) %>% mutate(pctf = totfemale/totname) %>% mutate(pctm = totmale/totname) %>% filter(pctf >= 1/3 & pctm >= 1/3) %>% arrange(desc(totname)) 
+
+head(data2020tot2, 10)
+```
+
+# filtering entire dataset for only the top 10 unisex names in 2020
+```{r}
+data2 <- data
+
+data2$name <- tolower(data2$name)
+
+data2$name <- trimws(data2$name)
+
+top10unisexnames <- c("parker", "river", "charlie", "blake", "emerson", "amari", "phoenix", "finley", "remington", "dakota")
+
+
+data3 <- data2 %>% filter(name %in% top10unisexnames)
+
+ggplot(data2, aes(year, count, fill = sex)) + geom_col()
+
+#view(data3)
+```
+
+# create region column
+```{r}
+data4 <- data3
+data4$region <- data4$state_abb
+
+data4$region <- fct_collapse(data4$region, 
+                 "Northeast" = c("ME", "VT", "NH", "MA", "CT", "RI", "NY", "NJ", "PA", "DE", "MD"),
+                 "Southeast" = c("DC", "VA", "WV", "NC", "SC", "GA", "FL", "AL", "MS", "LA", "AR", "TN", "KY"),
+                 "Southwest" = c("AZ", "NM", "OK", "TX"),
+                 "West" = c("CO", "WY", "MT","ID", "UT", "NV", "WA", "OR", "CA", "AK", "HI"),
+                 "Midwest" = c("ND", "SD", "NE", "KS", "MN", "IA", "MO", "WI", "IL", "IN", "MI", "OH") 
+                 )
+
+levels(data4$region)
+```
+
+# year intervals
+```{r}
+data5 <- data4
+
+data5$year <- as.numeric(data5$year)
+
+#data5$decade <- data5$year
+
+data5[ , "decade"] = NA
+
+#length(data5$decade)
+
+str(data5$year)
+
+
+datadecade1 <- data5 %>% filter(year >= 1910 & year < 1920) %>% mutate(decade = "1910-1919")
+
+datadecade2 <- data5 %>% filter(year >= 1920 & year < 1930) %>% mutate(decade = "1920-1929")
+
+datadecade3 <- data5 %>% filter(year >= 1930 & year < 1940) %>% mutate(decade = "1930-1939")
+
+datadecade4 <- data5 %>% filter(year >= 1940 & year < 1950) %>% mutate(decade = "1940-1949")
+
+datadecade5 <- data5 %>% filter(year >= 1950 & year < 1960) %>% mutate(decade = "1950-1959")
+
+datadecade6 <- data5 %>% filter(year >= 1960 & year < 1970) %>% mutate(decade = "1960-1969")
+
+datadecade7 <- data5 %>% filter(year >= 1970 & year < 1980) %>% mutate(decade = "1970-1979")
+
+datadecade8 <- data5 %>% filter(year >= 1980 & year < 1990) %>% mutate(decade = "1980-1989")
+
+datadecade9 <- data5 %>% filter(year >= 1990 & year < 2000) %>% mutate(decade = "1990-1999")
+
+datadecade10 <- data5 %>% filter(year >= 2000 & year < 2010) %>% mutate(decade = "2000-2010")
+
+datadecade11 <- data5 %>% filter(year >= 2010 & year < 2020) %>% mutate(decade = "2010-2019")
+
+datadecade12 <- data5 %>% filter(year >= 2020 ) %>% mutate(decade = "2020+")
+
+data6 <- rbind(datadecade1, datadecade2, datadecade3, datadecade4, datadecade5, datadecade6, datadecade7, datadecade8, datadecade9, datadecade10, datadecade11, datadecade12)
+
+view(data6)
+
+data6$decade <- as.factor(data6$decade)
+data6$name <- as.factor(data6$name)
+
+levels(data6$decade)
+```
+
+```{r}
+levels(data6$name)
+```
+
+```{r}
+ggplot(data6, aes(year, count, fill = sex)) + geom_col()
+ggplot(data6, aes(year, count, fill = name)) + geom_col()
+
+ggplot(data6, aes(name, year, fill = name)) + geom_boxplot()
+ggplot(data6, aes(year, count, fill = name)) + geom_col() + facet_wrap(~name)
+ggplot(data6, aes(year, count, fill = sex)) + geom_col() + facet_wrap(~name)
+ggplot(data6, aes(decade, count, fill = sex)) + geom_col() + facet_wrap(~name)
+
+ggplot(data6, aes(decade, count, fill = name)) + geom_col()
+
+
+write.csv(data6, "UnisexNameData.csv")
+```
+
+-------------------
+
+```{r, eval=FALSE}
+for(i in nrow(data5)){
+
+  if (data5$year[i] >= 1910 & data5$year[i] < 1920){
+    data5$decade[i] <- "1910-1919"}
+  
+  else if (data5$year[i] >= 1920 & data5$year[i] < 1930){
+    data5$decade[i] <- "1920-1929"}
+  
+  else if (data5$year[i] >= 1930 & data5$year[i] < 1940){
+    data5$decade[i] <- "1930-1939"}
+  
+  else if (data5$year[i] >= 1940 & data5$year[i] < 1950){
+    data5$decade[i] <- "1940-1949"}
+  
+  else if (data5$year[i] >= 1950 & data5$year[i] < 1960){
+    data5$decade[i] <- "1950-1959"}
+  
+  else if (data5$year[i] >= 1960 & data5$year[i] < 1970){
+    data5$decade[i] <- "1960-1969"}
+  
+  else if (data5$year[i] >= 1970 & data5$year[i] < 1980){
+    data5$decade[i] <- "1970-1979"}
+  
+  else if (data5$year[i] >= 1980 & data5$year[i] < 1990){
+    data5$decade[i] <- "1980-1989"}
+  
+  else if (data5$year[i] >= 1990 & data5$year[i] < 2000){
+    data5$decade[i] <- "1990-1999"}
+  
+  else if (data5$year[i] >= 2000 & data5$year[i] < 2010){
+    data5$decade[i] <- "2000-2009"}
+  
+  else if (data5$year[i] >= 2010 & data5$year[i] < 2020){
+    data5$decade[i] <- "2010-2019"}
+  
+  else data5$decade[i] <- "2020+"
+}
+str(data5$year)
+data5$decade <- as.factor(data5$decade)
+
+levels(data5$decade)
+
+```
+
+# Jasmine's Classification Tree Building
+
+# RECURSIVE BINARY SPLITTING
+
+```{r}
+library(tree)
+library(randomForest)
+library(tidyverse)
+
+# Read in data
+names <- read.csv("/Users/jasminetang/Desktop/DS 4002/UnisexNameData.csv")
+
+
+# Convert character to factor
+names$sex <- factor(names$sex)
+names$name <- factor(names$name)
+names$region <- factor(names$region)
+
+# Only keep columns we intend to use in our data set
+unisex_names <- names[,-c(1,2,8)]
+
+# Load the dplyr and tidyr packages
+library(dplyr)
+library(tidyr)
+
+# Expand the data based on the count column
+# Get rid of the count column so that each observation in our data set is one baby
+expanded_unisex_names <- unisex_names %>%
+  uncount(weights = count)
+
+# Split into training and test data
+set.seed(4002)
+sample.data <- sample.int(nrow(expanded_unisex_names), floor(.70*nrow(expanded_unisex_names)), replace = F)
+train <- expanded_unisex_names[sample.data, ]
+test <- expanded_unisex_names[-sample.data, ]
+
+# Create the first classification tree using class notes --- this is a basic model
+  # Will give us the predictors used, numnber of terminal nodes
+tree.class.train <- tree::tree(sex~.,data=train)
+summary(tree.class.train)
+
+# NOTES
+# Our classification tree only makes use of the year and name variables
+  # The region variable is deemed insignificant in our investigation
+```
+
+# Basic graphical output
+
+```{r}
+# Graphical output
+
+plot(tree.class.train)
+text(tree.class.train,cex=0.4,pretty=0)
+
+# Confusion matrix
+
+y<-expanded_unisex_names$sex
+y.test<-y[-sample.data]
+tree.pred.test <- predict(tree.class.train,newdata=test,type="class")
+table(y.test,tree.pred.test)
+
+# Overall test error rate
+
+test_error = mean(tree.pred.test != y.test)
+test_error
+
+# Threshold adjustment
+tree.pred.probs <- predict(tree.class.train,newdata=test)
+table(y.test,tree.pred.probs[,2]>.15)
+```
+
+# Nice looking decision tree graphic
+
+```{r}
+library(rpart)
+name_tree <- rpart(sex ~ ., data = train, method = "class")
+
+# Plot the decision tree
+library(rpart.plot)
+rpart.plot(name_tree, main = "Decision Tree")
+```
+
+# Pruned classification tree
+
+```{r}
+# Pruned classification tree summary output
+cv.class <- tree::cv.tree(tree.class.train,K=10,FUN=prune.misclass)
+trees.num.class <- cv.class$size[which.min(cv.class$dev)]
+prune.class <- tree::prune.misclass(tree.class.train,best=trees.num.class)
+summary(prune.class)
+
+# Graphical Output
+plot(prune.class)
+text(prune.class,cex=0.5,pretty=0)
+
+# Confusion Matrix
+tree.pred.prune <- predict(prune.class,newdata=test,type="class")
+table(y.test,tree.pred.prune)
+
+# Threshold Adjustment
+prune.pred.probs <- predict(prune.class,newdata=test)
+table(y.test,prune.pred.probs[,2]>.15)
+```
+
+
+
