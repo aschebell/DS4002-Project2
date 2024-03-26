@@ -3,9 +3,9 @@
 ## Contents of Repository
 This repository contains the code and documentation for conducting forecasting on unisex baby name trends. This repository contains a README file, LICENSE file, SCRIPTS folder, DATA folder, and OUTPUT folder. 
 
-## *Section 1: Software and Platform Section* - CHANGE
+## Section 1: Software and Platform Section
 - Software Used: RStudio (R)
-- EDIT: Packages Used: tidyverse, dplyr, PMCMRplus, readxl, plotly, wordcloud, tidytext, glue, stringr, tm, VADER from the nltk Python library
+- Packages Used: tidyverse, ggplot2, tree, randomForest, dplyr, tidyr, rpart
 - Platform used: Mac
 
 ## Section 2: Map of Documentation *(EDIT)*
