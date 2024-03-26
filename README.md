@@ -53,7 +53,7 @@ DATA PREP FOR BASIC CLASSIFICATION TREE MODEL BUILDING:
 2. Convert the "sex", "name", and "region" variables into factor variable types
 3. Remove unnecessary columns from our current data frame -- this should include the "decades" column (which we won't need for analysis), the first column, and the "stat_abb" column
 4. Use the uncount() function in R where the "weights" argument is set equal to the "count" column to expand our data based on the count column
-   a. After this step each row should represent one single baby in our data set
+   - After this step each row should represent one single baby in our data set
 5. Set the seed using set.seed(4002) --> you can use a random number but make sure to stay consistent throughout the project
 6. Split our data set now into a training and a test data set with a 70/30 split
 
@@ -61,17 +61,17 @@ BASIC CLASSIFICATION TREE -- RECURSIVE BINARY SPLITTING:
 
 1. Use the tree::tree(...,data=...) function from the tree library in R to create the first basic classification tree model
 2. Apply summary() to the classification tree created above
-   a. This will give you the significant variables used, the number of terminal nodes, the residual mean deviance, and also the misclassification error rate of the model (test error rate!)
+   - This will give you the significant variables used, the number of terminal nodes, the residual mean deviance, and also the misclassification error rate of the model (test error rate!)
 3. Apply plot() and text() to the classification tree created in (1) to view the graphical output
 4. Optional: Use the y response of our data set, the y response of our test data set, the tree we created in (1), the predict() function, and the table() function in R to create a confusion matrix
 
 CLASSIFICATION TREE USING RPART PACKAGE IN R:
 1. Use the rpart() and rpart.plot() functions from the rpart and rpart.plot packages in R to create classification trees that are more informative and visually appealing than the basic models we created above
-   a. The rpart() method can be used on our data set to actually create the classification tree, while the rpart.plot() method is used to output the classification tree graphically
+   - The rpart() method can be used on our data set to actually create the classification tree, while the rpart.plot() method is used to output the classification tree graphically
 
 PRUNE THE CLASSIFICATION TREE:
 1. You may need to use the tree::cv.tree() and tree::prune.misclass() functions on our initial basic classification tree model to remove some of the branches, reduce its complexity, or improve its general performance-- pruning a classification tree generally prevents overfitting of the data in the model
-   a. Note that in our project, when we pruned the classification tree using our data set and then reapplied the plot() function on our tree to observe its graphical output, our tree looked exactly the same as before pruning-- in this specific case it appears that pruning the classification tree will not lead to significant improvements
+   - Note that in our project, when we pruned the classification tree using our data set and then reapplied the plot() function on our tree to observe its graphical output, our tree looked exactly the same as before pruning-- in this specific case it appears that pruning the classification tree will not lead to significant improvements
 
 
 
