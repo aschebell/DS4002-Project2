@@ -73,6 +73,10 @@ PRUNE THE CLASSIFICATION TREE:
 1. You may need to use the tree::cv.tree() and tree::prune.misclass() functions on our initial basic classification tree model to remove some of the branches, reduce its complexity, or improve its general performance-- pruning a classification tree generally prevents overfitting of the data in the model
    - Note that in our project, when we pruned the classification tree using our data set and then reapplied the plot() function on our tree to observe its graphical output, our tree looked exactly the same as before pruning-- in this specific case it appears that pruning the classification tree will not lead to significant improvements
 
+ANSWER THE RESEARCH QUESTION AND DETERMINE FUTURE PROJECT IMPROVEMENT:
+1. Since our original research question asked whether we could create a model to successfully determine the sex of unisex-named babies (under the hypothesis that we would have more female than male babies), the last step of this investigation would be to look at the test error rate of our model to determine its success, and also the ending branches of the model to determine whether our hypothesis is supported by the model we created
+2. Ask: are there any underlying trends in the classification model we created that we did not anticipate, but can help to lead us into further investigation?
+3. With time allowing, after pruning our classification tree we would want to use explore methods that could potentially create more accurate models, such as bagging, random forests, and boosting
 
 
 
